@@ -14,5 +14,5 @@ while True:
 	print("Pressure: %0.3f hPa" %bme680.pressure)
 	print("Altitude = %0.2f meters" % bme680.altitude)
 	
-	time.sleep(2)
+	time.sleep(.2)
  
