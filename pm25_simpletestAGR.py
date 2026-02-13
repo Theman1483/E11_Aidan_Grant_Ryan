@@ -95,7 +95,7 @@ for i in range(30):
 
     now = time.time()
     env = aqdata["pm25 env"]
-    particles = aqdata["particles 03um"]
+    particles = aqdata["particles 25um"]
     csvwriter.writerow([now,env,particles])
 
 
