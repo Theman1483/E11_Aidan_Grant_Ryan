@@ -58,7 +58,7 @@ csvwriter.writerow(meta)
 #     now = time.time()
 #     value = np.random.random()
 #     csvwriter.writerow([now,value])
-
+baseTime = time.time()
 for i in range(30):
     time.sleep(1)
 
@@ -69,6 +69,8 @@ for i in range(30):
         print("Unable to read from sensor, retrying...")
         continue
 
+    print()
+    print(time.time() - baseTime, "seconds since start")
     print()
     print("Concentration Units (standard)")
     print("---------------------------------------")
