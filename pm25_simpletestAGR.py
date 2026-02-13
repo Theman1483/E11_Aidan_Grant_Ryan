@@ -47,7 +47,7 @@ pm25 = PM25_UART(uart, reset_pin)
 
 print("Found PM2.5 sensor, reading data...")
 
-file = open('simpletestdata/simpletest.csv', 'w', newline = None)
+file = open('data/simpletest.csv', 'w', newline = None)
 
 csvwriter = csv.writer(file, delimiter=',')
 
