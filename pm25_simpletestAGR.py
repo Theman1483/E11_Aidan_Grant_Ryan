@@ -60,7 +60,7 @@ csvwriter.writerow(meta)
 #     csvwriter.writerow([now,value])
 
 for i in range(30):
-    time.sleep(0.5)
+    time.sleep(1)
 
     try:
         aqdata = pm25.read()
