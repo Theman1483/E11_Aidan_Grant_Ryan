@@ -6,7 +6,7 @@ Example sketch to connect to PM2.5 sensor with either I2C or UART.
 """
 
 import time
-
+import csv
 import board
 import busio
 from digitalio import DigitalInOut, Direction, Pull
