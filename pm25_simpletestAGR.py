@@ -51,7 +51,7 @@ file = open('data/simpletest.csv', 'w', newline = None)
 
 csvwriter = csv.writer(file, delimiter=',')
 
-meta = ['time','PM2.5 env','particles 03um']
+meta = ['time','PM2.5 env','particles 2.5um']
 csvwriter.writerow(meta)
 
 # for i in range(10):
