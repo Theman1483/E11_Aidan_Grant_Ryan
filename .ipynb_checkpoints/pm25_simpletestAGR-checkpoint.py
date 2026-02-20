@@ -62,6 +62,7 @@ csvwriter.writerow(meta)
 #     value = np.random.random()
 #     csvwriter.writerow([now,value])
 
+#==========================================
 i2c = board.I2C()
 bme680 = adafruit_bme680.Adafruit_BME680_I2C(i2c)
 
@@ -71,6 +72,7 @@ temp_offset = -5
 i=0
 print("Time = %0.2f" %time.time())
 temp = []
+#==========================================
 
 baseTime = time.time()
 for i in range(30):
@@ -107,20 +109,30 @@ for i in range(30):
     print("Particles > 10 um / 0.1L air:", aqdata["particles 100um"])
     print("---------------------------------------")
 
+    #==========================================
+    temp.append(bme680.temperature)
+    print("---------------------------------------")
+    print("Weather Data")
+    print("---------------------------------------")
+    print("Gas: %d ohm" %bme680.gas)
+    print("Humidity : %0.1f %%" %bme680.relative_humidity)
+    print("Pressure: %0.3f hPa" %bme680.pressure)
+    print("Altitude = %0.2f meters" % bme680.altitude)
+    print("---------------------------------------")
+    i+=1
+    #==========================================
+    
     now = time.time()
     env = aqdata["pm25 env"]
     particles = aqdata["particles 25um"]
-    csvwriter.writerow([now,env,particles])
+    
+    csvwriter.writerow([now,env,particles,])
 
-    temp.append(bme680.temperature)
-	print("Gas: %d ohm" %bme680.gas)
-	print("Humidity : %0.1f %%" %bme680.relative_humidity)
-	print("Pressure: %0.3f hPa" %bme680.pressure)
-	print("Altitude = %0.2f meters" % bme680.altitude)
-	print("Time = %0.2f" %time.time())
-	i+=1
+    
 
+#==========================================
 print("Temperature: ")
 print(temp)
+#==========================================
 
 file.close()
