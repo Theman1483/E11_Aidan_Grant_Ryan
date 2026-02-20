@@ -119,11 +119,11 @@ for i in range(30):
     print("---------------------------------------")
     print("Weather Data")
     print("---------------------------------------")
-	print("Gas: %d ohm" %bme680.gas)
+    print("Gas: %d ohm" %bme680.gas)
 	print("Humidity : %0.1f %%" %bme680.relative_humidity)
 	print("Pressure: %0.3f hPa" %bme680.pressure)
-	print("Altitude = %0.2f meters" % bme680.altitude)
-	print("Time = %0.2f" %time.time())
+print("Altitude = %0.2f meters" % bme680.altitude)
+    print("Time = %0.2f" %time.time())
     print("---------------------------------------")
 	i+=1
 #==========================================
