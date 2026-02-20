@@ -74,7 +74,7 @@ print("Time = %0.2f" %time.time())
 #==========================================
 
 baseTime = time.time()
-for i in range(30):
+for i in range(300):
     time.sleep(1)
 
     try:
