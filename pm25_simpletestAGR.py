@@ -5,10 +5,13 @@
 Example sketch to connect to PM2.5 sensor with either I2C or UART.
 """
 
+import adafruit_bme680
 import time
 import csv
 import board
 import busio
+import pandas as pd
+import numpy as np
 from digitalio import DigitalInOut, Direction, Pull
 
 from adafruit_pm25.i2c import PM25_I2C
@@ -58,6 +61,17 @@ csvwriter.writerow(meta)
 #     now = time.time()
 #     value = np.random.random()
 #     csvwriter.writerow([now,value])
+
+i2c = board.I2C()
+bme680 = adafruit_bme680.Adafruit_BME680_I2C(i2c)
+
+bme680.sea_level_pressure = 1013.25
+
+temp_offset = -5
+i=0
+print("Time = %0.2f" %time.time())
+temp = []
+
 baseTime = time.time()
 for i in range(30):
     time.sleep(1)
@@ -98,5 +112,15 @@ for i in range(30):
     particles = aqdata["particles 25um"]
     csvwriter.writerow([now,env,particles])
 
+    temp.append(bme680.temperature)
+	print("Gas: %d ohm" %bme680.gas)
+	print("Humidity : %0.1f %%" %bme680.relative_humidity)
+	print("Pressure: %0.3f hPa" %bme680.pressure)
+	print("Altitude = %0.2f meters" % bme680.altitude)
+	print("Time = %0.2f" %time.time())
+	i+=1
+
+print("Temperature: ")
+print(temp)
 
 file.close()
