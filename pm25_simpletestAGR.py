@@ -124,7 +124,7 @@ for i in range(30):
     now = time.time()
     env = aqdata["pm25 env"]
     particles = aqdata["particles 25um"]
-    temp = (bme680.temperature + temperature_offset)
+    temp = bme680.temperature
     gas = bme680.gas
     humidity = bme680.relative_humidity
     pressure = bme680.pressure
