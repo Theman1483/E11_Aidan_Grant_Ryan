@@ -71,7 +71,6 @@ bme680.sea_level_pressure = 1013.25
 temp_offset = -5
 i=0
 print("Time = %0.2f" %time.time())
-temp = []
 #==========================================
 
 baseTime = time.time()
@@ -109,28 +108,33 @@ for i in range(30):
     print("Particles > 10 um / 0.1L air:", aqdata["particles 100um"])
     print("---------------------------------------")
 
-    now = time.time()
-    env = aqdata["pm25 env"]
-    particles = aqdata["particles 25um"]
-    csvwriter.writerow([now,env,particles])
-
     #==========================================
-    temp.append(bme680.temperature)
     print("---------------------------------------")
     print("Weather Data")
     print("---------------------------------------")
+    print("Temperature = " bme680.temperature)
     print("Gas: %d ohm" %bme680.gas)
     print("Humidity : %0.1f %%" %bme680.relative_humidity)
     print("Pressure: %0.3f hPa" %bme680.pressure)
-    print("Altitude = %0.2f meters" % bme680.altitude)
-    print("Time = %0.2f" %time.time())
+    print("Altitude = %0.2f meters" %bme680.altitude)
     print("---------------------------------------")
     i+=1
     #==========================================
+    
+    now = time.time()
+    env = aqdata["pm25 env"]
+    particles = aqdata["particles 25um"]
+    temp = bme680.temperature
+    gas = %bme680.gas
+    humidity = %bme680.relative_humidity
+    pressure = %bme680.pressure
+    altitude = %bme680.altitude
+    csvwriter.writerow([now,env,particles,temp,gas,humidity,pressure,altitude])
+
+    
 
 #==========================================
-print("Temperature: ")
-print(temp)
+
 #==========================================
 
 file.close()
