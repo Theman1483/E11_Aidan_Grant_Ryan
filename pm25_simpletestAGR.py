@@ -50,7 +50,7 @@ pm25 = PM25_UART(uart, reset_pin)
 
 print("Found PM2.5 sensor, reading data...")
 
-file = open('data/indoortest.csv', 'w', newline = None)
+file = open('data/newoutdoortest.csv', 'w', newline = None)
 
 csvwriter = csv.writer(file, delimiter=',')
 
@@ -68,10 +68,13 @@ bme680 = adafruit_bme680.Adafruit_BME680_I2C(i2c)
 
 bme680.sea_level_pressure = 1013.25
 
+time.sleep(300)  
+
 temp_offset = -5
 i=0
 print("Time = %0.2f" %time.time())
 #==========================================
+
 
 baseTime = time.time()
 for i in range(300):
