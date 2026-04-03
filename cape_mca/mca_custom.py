@@ -5,6 +5,8 @@ from capemca import *
 import time
 import numpy as np
 import matplotlib.pyplot as plt
+import csv
+import datetime
 
 devices = find_all_mcas()
 print(f"Found {len(devices)} MCA device(s)")
@@ -14,9 +16,15 @@ if not devices:
 
 duration = float(sys.argv[1]) if len(sys.argv) > 1 else 60.0
 window = float(sys.argv[2]) if len(sys.argv) > 2 else 15.0
+output_file = sys.argv[3] if len(sys.argv) > 3 else 'mca_readings.csv'
 
 spectra = []
 read_times = []
+
+# Open CSV file and write header
+csvfile = open(output_file, 'w', newline='')
+writer = csv.writer(csvfile)
+writer.writerow(['read_index', 'elapsed_s', 'timestamp_iso', 'read_duration_s', 'cps', 'total_count', 'spectrum_sum'])
 
 with CapeMCA() as mca:
 	try:
@@ -69,6 +77,14 @@ with CapeMCA() as mca:
 			spectra.append(spec_data)
 			read_times.append(elapsed)
 			reads += 1
+
+				# Write CSV row for this read
+				timestamp_iso = datetime.datetime.fromtimestamp(read_start).isoformat()
+				read_duration = read_end - read_start
+				cps = getattr(status, 'cps', None)
+				total_count = getattr(status, 'total_count', None)
+				writer.writerow([reads, elapsed, timestamp_iso, f"{read_duration:.6f}", cps, total_count, spec_total])
+				csvfile.flush()
 
 		print(f"\nCompleted {reads} reads in {time.time() - start:.2f}s "
 			  f"(window={window}s)")
